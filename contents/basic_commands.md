@@ -1,184 +1,70 @@
-#Linux command basis
-Trong phần này điều quan trọng cần tìm hiểu là inode.
-Không giống như con người, nhìn các tập tin thông qua tên thì
-OS lại nhìn các tập tin thông qua inode-number.
-Inode-number là một con số đại diện cho vị trí của data trên đĩa
+# Các lệnh linux cơ bản
+## Lệnh cd
+Lệnh cd giúp ta di chuyển giữa các thư mục. Để di chuyển ta có thể dùng lệnh 
 
-
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Explore
- @toan1012
- Sign out
- Watch 0
-  Star 3  Fork 10 kalise/linux-notes
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
-Branch: master Find file Copy pathlinux-notes/content/working_with_files.md
-439d81d  on Apr 29, 2017
-@gambadilegno gambadilegno First Commit
-1 contributor
-RawBlameHistory     
-182 lines (160 sloc)  8.78 KB
-The file streams
-
-When commands are executed, by default there are three standard file streams or descriptors always open for use:
-
-standard input or stdin
-standard output or stdout
-standard error or stderr
-Usually, stdin is your keyboard, stdout and stderr are printed on your terminal; often stderr is redirected to an error logging file. The stdin is often supplied by directing input to come from a file or from the output of a previous command through a pipe. The stdout is also often redirected into a file. Since stderr is where error messages are written, often nothing will go there.
-
-In Linux, all open files are represented internally by what are called file descriptors. Simply put, these are represented by numbers starting at zero. The stdin is file descriptor 0, stdout is file descriptor 1, and stderr is file descriptor 2. Typically, if other files are opened in addition to these three, which are opened by default, they will start at file descriptor 3 and increase from there.
-
-We can redirect the three standard filestreams so that we can get input from either a file or another command instead of from our keyboard, and we can write output and errors to files or send them as input for subsequent commands. For example, having a program called do_something that reads from stdin and writes to stdout and stderr, we can change its input source:
-
-$ do_something < input-file
-If you want to send the output to a file, use the this as in:
-
-$ do_something > output-file
-We can pipe the output of one command or program into another as its input.
-
-$ command1 | command2 | command3
-The above represents what we often call a pipeline and allows linux to combine the actions of several commands into one.
-
-Search for files
-
-The locate utility performs a search through a previously constructed database of files and directories on your system, matching all entries that contain a specified character string. The locate utilizes the database created by another program, updatedb. Most Linux systems run this automatically once a day. However, you can update it at any time by just running updatedb from the command line as the root user.
-
-# yum install -y mlocate
-# updatedb
-# locate zip
-The result of locate utility can sometimes result in a very long list. To get a shorter more relevant list we can use the grep program as a filter. It will print only the lines that contain one or more specified strings as in:
-
-$ locate zip | grep bin
-/usr/bin/gpg-zip
-/usr/bin/gunzip
-/usr/bin/gzip
-/usr/bin/zipdetails
-which will list all files and directories with both "zip" and "bin" in their name.
-
-Wildcards can be used in search for a filename containing specific characters.
-
-Wildcards	Result
-?	Matches any single character
-*	Matches any string of characters
-[set]	Matches any character not in the set of characters
-[!set]	Matches any character not in the set of characters
-The find is extremely useful and often-used utility program in the daily life of a Linux system administrator. It recurses down the filesystem tree from any particular directory (or set of directories) and locates files that match specified conditions. The default is always the present working directory.
-
-$ find /var -name *.log
-/var/log/audit/audit.log
-/var/log/tuned/tuned.log
-/var/log/anaconda/anaconda.log
-/var/log/anaconda/anaconda.program.log
-/var/log/anaconda/anaconda.packaging.log
-/var/log/anaconda/anaconda.storage.log
-When no arguments are given, find lists all files in the current directory and all of its subdirectories.
-
-Searching for files and directories named "gcc":
-
-$ find /usr -name gcc
-Searching only for directories named "gcc":
-
-$ find /usr -type d -name gcc
-Searching only for regular files named "test1":
-
-$ find /usr -type f -name test1
-Another good use of find is being able to run commands on the files that match your search criteria. To find and remove all files that end with .swp:
-
-$ find -name "*.swp" -exec rm {} ’;’
-$ find -name "*.swp" -ok rm {} \;
-The {} is a place holder that will be filled with all the file names that result from the find expression, and the preceding command will be run on each one individually. Note that you have to end the command with either ‘;’ or \; Both forms are fine. The second form behaves the same as the first one except that find will prompt you for permission before executing the command. This makes it a good way to test your results before blindly executing any potentially dangerous commands.
-
-It is sometimes the case that you wish to find files according to attributes such as when they were created, last used, etc, or based on their size. Both are easy to accomplish.
-
-Finding based on time:
-
-$ find / -ctime 3
-Here, -ctime is when the inode meta-data (i.e., file ownership, permissions, etc) last changed; it is often, but not necessarily when the file was first created. You can also search for accessed/last read -atime or modified/last written -mtime times. The number is the number of days and can be expressed as either a number (n) that means exactly that value, +n which means greater than that number, or -n which means less than that number.
-
-Finding based on sizes:
-
-$ find / -size +10M
-To find files greater than 10 MB in size.
-
-Manage files
-
-Use the following utilities to view files:
-
-Command	Usage
-cat	Used for viewing files that are not very long
-tac	Used to look at a file backwards, starting with the last line
-less	Used to view larger files because it is a paging program; it pauses at each screenful of text, provides scroll-back capabilities, and lets you search and navigate within the file.
-tail	Used to print the last 10 lines of a file by default. You can change the number of lines by doing -n 15 or just -15 if you wanted to look at the last 15 lines instead of the default
-head	The opposite of tail; by default it prints the first 10 lines of a file
-The touch command is often used to set or update the access, change, and modify times of files. By default it resets a file's time stamp to match the current time.
-
-However, you can also create an empty file using touch:
-
-$ touch <filename>
-This is normally done to create an empty file as a placeholder for a later purpose. The -t option allows you to set the date and time stamp of the file. To set the time stamp to a specific time:
-
-$ touch -t 03201600 <filename>
-This sets the file, myfile's, time stamp to 4 p.m., March 20th (03 20 1600).
-
-The mkdir command is used to create a directory. Removing a directory is simply done with rmdir command. The directory must be empty or it will fail.
-```sh]
-# mkdir ./test
-# rmdir ./test
-# 
-# mkdir ./test
-# mkdir ./test/inside
-# rmdir ./test
-rmdir: failed to remove ‘test’: Directory not empty
-# rm -rf ./test
-# ls ./test
-ls: cannot access ./test: No such file or directory
-''
-Compare files
-
-The diff command is used to compare files and directories.
 ```
-$ cat file1.txt
-Amor, ch'a nullo amato amar perdona,
-Mi prese del costui piacer si forte,
-Che, come vedi, ancor non m'abbandona.
-$ 
-$  cat file2.txt
-amor, ch'a nullo amato amar perdona,
-mi prese del costui piacer si forte,
-che, come vedi, ancor non m'abbandona.
-$ 
-$ diff  file1.txt file2.txt
-< Amor, ch'a nullo amato amar perdona,
-< Mi prese del costui piacer si forte,
-< Che, come vedi, ancor non m'abbandona.
----
-> amor, ch'a nullo amato amar perdona,
-> mi prese del costui piacer si forte,
-> che, come vedi, ancor non m'abbandona.
-$ 
-$ diff -c file1.txt file2.txt
-*** file1.txt   2015-02-17 16:10:03.781804799 +0100
---- file2.txt   2015-02-17 16:13:41.059088459 +0100
-***************
-! Amor, ch'a nullo amato amar perdona,
-! Mi prese del costui piacer si forte,
-! Che, come vedi, ancor non m'abbandona.
---- 1,3 ----
-! amor, ch'a nullo amato amar perdona,
-! mi prese del costui piacer si forte,
-! che, come vedi, ancor non m'abbandona.
-$ 
-$  diff -i file1.txt file2.txt
-$ 
-The file utility
+cd /path/to/directory
+```
 
-In Linux, a file's extension often does not categorize it the way it might in other operating systems. One can not assume that a file named file.txt is a text file and not an executable program. In Linux a file name is generally more meaningful to the user of the system than the system itself; in fact most applications directly examine a file's contents to see what kind of object it is rather than relying on an extension. The real nature of a file can be ascertained by using the file utility. For the file names given as arguments, it examines the contents and certain characteristics to determine whether the files are plain text, shared libraries, executable programs, scripts, or something else.
+Để cho nhanh chóng, linux có các ký tự đặc biệt để di chuyển. Cụ thể như sau:
 
-$ file /etc/resolv.conf
-/etc/resolv.conf: ASCII text
+* "cd ." không di chuyển.
+* "cd .." lủi về một cấp trên cây thư mục
+* "cd ~" trở về thư mục home của user hiện tại
+* "cd /" trở về thư mục gốc.
+
+## Lệnh ls
+Lệnh ls dùng để liệt kê các thành phần trong một thư mục hoặc thông tin về file. Liệt kê subdir, file, quyền, sở hữu,...
+
+Các tùy chọn hay sử dụng của ls:
+
+* ls -a hiển thị tất cả các file và thư mục ẩn ở thư mục hiện hành.
+* ls -s hiển thị tất cả các thư mục và file ẩn ở thư mục người dùng.
+* ls -l hiển thị chi tiết các tập tin và thư mục hiện hành.
+* ls -h hiển thị kích thước quy đổi ra Mb hoặc Gb.
+* ls -i hiển thị inode của file.
+
+Lệnh ls có thể kết hợp với các ký hiệu đại diện đặc biệt như ., .., ~, / hoặc thêm điều kiện nhờ lệnh grep để liệt kê.
+
+## Hardlink và Softlink
+Hai khái niệm này có liên quan mật thiết tới __Inode__.
+
+Từ phía người dùng sẽ nhìn file hoặc thư mục thông qua tên, nhưng đối với hệ thống, file và thư mục là những inode khác nhau có inode number khác nhau lưu trữ những thông tin trong *metadata* của inode.
+
+![inode](http://www.gocit.vn/wp-content/uploads/2013/08/inode.png)
+
+Mỗi inode có 1 inode number duy nhất. Để nhìn được inode number thì ta dùng lệnh ls-l hoặc ls -i 
+
+Thông tin trong inode gồm: 
+
+* Dung lượng file tính bằng bytes.
+* Device ID : mã số thiết bị lưu file.
+* User ID : mã số chủ nhân của file.
+* Group ID.: mã số nhóm của chủ file.
+* File mode : gồm kiểu file và các quyền truy cập file (permissions).
+* Hệ thống phụ và các cờ hạn chế quyền truy cập file.
+* Timestamps: các mốc thời gian khi: bản thân inode bị thay đổi (ctime), nội dung file thay đổi (mtime) và lần truy cập mới nhất (atime).
+* Link count : số lượng hard links trỏ đến inode.
+* Các con trỏ chỉ đến các blocks trên ổ cứng dùng lưu nội dung file. Theo các con trỏ này mới biết file nằm ở đâu để đọc nội dung.
+
+**Hard link** là một liên kết (link) trỏ đến vị trí lưu một file trên ổ cứng, tức là những file hard link sẽ có cùng số inode.
+
+* Nếu đổi tên, xóa hoặc di chuyển file gốc sang thư mục khác, file hard link vẫn mở được vì nó vẫn trỏ đến vị trí lưu file cố định trên ổ cứng.
+Tên hard link có thể khác tên file gốc, hard link có thể nằm trong một thư mục khác với thư mục của file gốc (nhưng không được khác partition). Vì vậy một file có thể có nhiều tên file nằm ở các thư mục khác nhau. 
+* Khi sửa ở 1 file có hard link với các file khác, thì tất cả sẽ thay đổi theo khi refresh hoặc reload vì thực chất là sửa trên cùng một vùng nhớ mà tất cả chúng cùng trỏ tới.
+* Nếu xóa hard link hoặc xóa tên file gốc nhưng còn một hard link, file vẫn không bị xóa. File chỉ bị xóa khi không còn cái gì trỏ đến vị trí lưu nó. Như vậy muốn xóa một file, phải xóa tên file và tất cả các hard link của nó (link count bằng 0)
+* Hard link không tạo được với thư mục và không tạo được với file nằm trên một partition khác.
+* Lệnh ln: ln <path/tên file> <tên hard link>.
+Soft link (còn gọi là Symbolic link hoặc symlink) là một liên kết tạo một đường dẫn khác đến thư mục hoặc file gốc.
+
+**Soft link** (còn gọi là Symbolic link hoặc symlink) là một liên kết tạo một đường dẫn khác đến thư mục hoặc file gốc.
+
+* Ví dụ file gốc passwd có đường dẫn là /etc/passwd. Trong thư mục /home/user tạo một soft link đặt tên là “password” trỏ đến file đó. Như vậy đường dẫn mới đến file /etc/passwd là /home/user/password. Khi truy cập đến một trong hai đường dẫn trên đều là truy cập đến file passwd.
+
+* Nếu đổi tên, xóa hoặc chuyển file gốc sang thư mục khác thì soft link không có giá trị. Khác với hard link, khi xóa file có soft link, file bị xóa thật.
+* Có thể tạo soft link với thư mục và file nằm trên partition khác.
+* Soft link tạo bằng lệnh ln -s <path/tên file> <tên soft link>
+
+* Soft tạo liên kết thông qua tên file và thư mục.
+
+
