@@ -47,4 +47,4 @@ Loại bỏ config/data luôn thì ta dùng option purge thay remove
 
 Link tham khảo: 
 
-![thamkhao](https://askubuntu.com/questions/408608/saving-a-apt-get-file-for-future-installations-how-do-i-do-it)
+[thamkhao](https://askubuntu.com/questions/408608/saving-a-apt-get-file-for-future-installations-how-do-i-do-it)
