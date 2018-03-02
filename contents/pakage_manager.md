@@ -22,7 +22,7 @@ giải nén các gói riêng lẻ, chạy các script, cài đặt phần mềm 
 Lỗi Unmet dependencies.
 Sau khi down gói nmap về. dùng lệnh dpkg -i không được, cài g++ thì bị lỗi này.
 
-![error](https://imgur.com/7kL2ETY)
+![anhloi](https://i.imgur.com/7kL2ETY.png)
 
 
 Đầu tiên phải loại bỏ lỗi trên bằng cách dùng lệnh:
