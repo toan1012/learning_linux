@@ -41,9 +41,10 @@ Lệnh cơ bản để tìm kiếm thư mục và file đó là lệnh find. Dư
 
 ### 3.1. Đưa danh sách các file và thư mục con của thư mục hiện tại
 
-
 ```
 toan@toan:~/program/www/layer3$ find
+
+
 .
 ./f3.txt
 ./error.txt
@@ -181,11 +182,9 @@ Check, that it listed files from 2 separate directories.
 
 ### 3.9. Tìm kiếm file ẩn
 
-Hidden files on linux begin with a period. So its easy to mention that in the name criteria and list all hidden files.
-
 `$ find ~ -type f -name ".*"`
 
-### 3.10. Tìm kiếm file dựa vào chính xác permission
+### 3.10. Tìm kiếm file dựa vào permission
 
 ```
 $ find . -type f -perm 0664
@@ -195,15 +194,14 @@ $ find . -type f -perm 0664
 ./cool.php
 ```
 
-This can be useful to find files with wrong permissions which can lead to security issues. Inversion can also be applied to permission checking.
+### 3.11. Tìm kiếm file với sgid/suid bits 
 
-### 3.11. Find files with sgid/suid bits set
-
-The "perm" option of find command accepts the same mode string like chmod. The following command finds all files with permission 644 and sgid bit set.
+Tùy chọn "perm" trong lệnh find cho phép tìm kiếm tất cả các file có quyền 644 (hoặc một giá trị nào khác và kèm 
+theo giá trị sgid bit (sgid, sticky bit).
 
 `# find / -perm 2644`
 
-Similarly use 1664 for sticky bit. The perm option also supports using an alternative syntax instead of octal numbers.
+Tương tự 1664 cho sticky bit. Tùy chọn perm cũng cho phép hỗ trợ sử dụng ký tự thay vì số dạng thập phân.
 
 ```$ find / -maxdepth 2 -perm /u=s 2>/dev/null
 /bin/mount
@@ -215,9 +213,11 @@ Similarly use 1664 for sticky bit. The perm option also supports using an altern
 /sbin/mount.ecryptfs_private
 ```
 
-Note that the "2>/dev/null" removes those entries that have an error of "Permission Denied"
+Chú ý "2>/dev/null" Không hiện lỗi ra
 
-### 3.12. Find readonly files
+### 3.12. Tìm file chỉ đọc.
+
+Thực chất vẫn dùng tùy chọn perm với việc tìm file có quyền /u=r
 
 ```
 $ find /etc -maxdepth 1 -perm /u=r
@@ -238,13 +238,11 @@ $ find /bin -maxdepth 2 -perm /a=x
 /bin/mount
 /bin/zfgrep
 /bin/tempfile
-... output truncated ...
-Search Files Based On Owners and Groups
 ```
 
-### 3.14. Find files belonging to particular user
+### 3.14. Tìm file thuộc về một user cụ thể
 
-To find all or single file called tecmint.txt under /root directory of owner root.
+Ví dụ dưới ta tìm các file trong thư mục ./program/www/layer3 của user toan
 
 ```
 toan@toan:~$ find ./program/www/layer3/ -user toan
@@ -262,62 +260,50 @@ toan@toan:~$ find ./program/www/layer3/ -user toan
 ./program/www/layer3/conmeo.txt
 ```
 
-### 3.15. Find files modified N days back
+### 3.15. Tìm file đã được modified trong thời gian cụ thể
 
-To find all the files which are modified 50 days back.
+Lệnh dưới cho phép tìm tất cả file trên đã bị thay đổi từ 50 ngày trước.
 
 `# find / -mtime 50`
 
 ### 3.16. Tìm files được quản lý trong N ngày gần đây.
 
-Find all files that were accessed in the last 50 days.
-
 `# find / -atime 50`
+
 ### 3.17. Tìm file đã thay đổi trong khoảng thời gian
 
 Tìm tất cả các file đã thay đổi trong khoảng 50 tới dưới 100 ngày trở lại đây.
 
 `# find / -mtime +50 –mtime -100`
 
-### 3.18. Find files of given size
+### 3.18. Tìm file có kích thước thỏa mãn
 
 To find all 50MB files, use.
 
 `# find / -size 50M`
 
-### 3.19. Find files in a size range
-
-To find all the files which are greater than 50MB and less than 100MB.
+Tìm file có kích thước lớn hơn 50MB và nhỏ hơn 100MB.
 
 `$ find / -size +50M -size -100M`
 
-
-### 3.20. Find empty files and directories
-
-The following command uses the "empty" option of the find command, which finds all files that are empty.
+Tìm file trống.
 
 `# find /tmp -type f -empty`
 
-To file all empty directories use the type "d".
+Tìm thư mục trống.
+
+`$ find ~/ -type d -empty
 
 
-`$ find ~/ -type d -empty`
-Really very simple and easy
-
-
-### 3.21. Delete all matching files or directories
-
-The following command will remove all text files in the tmp directory.
-
+### 3.19. Xóa file hoặc thư mục sau khi tìm được
 
 `$ find /tmp -type f -name "*.txt" -exec rm -f {} \;`
 
-The same operating can be carried out with directories, just put type d, instead of type f.
-
-Lets take another example where we want to delete files larger than 100MB
+Với thư mục ta thay type f bằng type d.
 
 `$ find /home/bob/dir -type f -name *.log -size +10M -exec rm -f {} \;`
 
+Đoạn script trên xóa toàn bộ các file .log có kích thước 10MB
 
 
  
