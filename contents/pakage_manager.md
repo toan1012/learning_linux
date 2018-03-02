@@ -1,5 +1,5 @@
 
-# Hệ thống quản lý gói hệ thống
+# Hệ thống quản lý gói
 
 Các phần lõi của bản phân phối Linux và hầu hết các phần mềm bổ sung được cài đặt thông qua Hệ thống quản lý Gói. 
  Các package có thể phụ thuộc lẫn nhau. Có hai họ quản lý package là: quản lý dựa theo dpkg và rpm. Đây là những trình quản lý
@@ -21,6 +21,7 @@ giải nén các gói riêng lẻ, chạy các script, cài đặt phần mềm 
  
 Lỗi Unmet dependencies.
 Sau khi down gói nmap về. dùng lệnh dpkg -i không được, cài g++ thì bị lỗi này.
+
 ![error](http://prntscr.com/ilodxy)
 
 
@@ -46,7 +47,8 @@ Nếu xóa toàn bộ dependency `sudo apt-get remove --auto-remove nmap`
 Loại bỏ config/data luôn thì ta dùng option purge thay remove
 
 **Các lệnh quản lý gói**
-| **Hành động**                           | **RPM**                              | **Deb**                |
+
+| Hành động                               | RPM                                  | Deb                    |
 |-----------------------------------------|--------------------------------------|------------------------|
 | Cài đặt gói                             | rpm –i foo.rpm                       | dpkg --install foo.de  |
 | Cài đặt gói với dependencies trong repo | yum install foo                      | apt-get install foo    |
@@ -59,7 +61,5 @@ Loại bỏ config/data luôn thì ta dùng option purge thay remove
 | Lấy thông tin về gói đã cài đặt         | rpm –qil foo                         | dpkg --listfiles foo   |
 | Hiện các thông tin về gói đang có       | yum list foo                         | apt-cache search foo   |
 | Hiện tất cả các gói có thể              | yum list                             | apt-cache dumpavail    |
-
-Link tham khảo: 
 
 [thamkhao](https://askubuntu.com/questions/408608/saving-a-apt-get-file-for-future-installations-how-do-i-do-it)
