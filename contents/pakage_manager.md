@@ -21,7 +21,7 @@ giải nén các gói riêng lẻ, chạy các script, cài đặt phần mềm 
  
 Lỗi Unmet dependencies.
 Sau khi down gói nmap về. dùng lệnh dpkg -i không được, cài g++ thì bị lỗi này.
-![error](https://imgur.com/a/TlFUN)
+![error](http://prntscr.com/ilodxy)
 
 
 Đầu tiên phải loại bỏ lỗi trên bằng cách dùng lệnh:
@@ -44,6 +44,21 @@ Cài các gói được yêu cầu bằng lệnh dpkg –i tên_gói
 Để xóa phần mềm ta dùng lệnh `sudo apt-get remove nmap`
 Nếu xóa toàn bộ dependency `sudo apt-get remove --auto-remove nmap`
 Loại bỏ config/data luôn thì ta dùng option purge thay remove
+
+**Các lệnh quản lý gói**
+| **Hành động**                           | **RPM**                              | **Deb**                |
+|-----------------------------------------|--------------------------------------|------------------------|
+| Cài đặt gói                             | rpm –i foo.rpm                       | dpkg --install foo.de  |
+| Cài đặt gói với dependencies trong repo | yum install foo                      | apt-get install foo    |
+| Xóa gói                                 | rpm–e foo.rpm                        | dpkg --remove foo.deb  |
+| Xóa gói và dependencies dùng repo       | yum remove foo                       | apt-get remove foo     |
+| Update gói                              | rpm –U foo.rpmdpkg --install foo.deb | dpkg --install foo.deb |
+| Update gói dùng repo                    | yum update foo                       | apt-get upgrade foo    |
+| Update toàn bộ hệ thống                 | yum update                           | apt-get dist-upgrade   |
+| Hiện toàn bộ các gói đã cài đặt         | yum list installed                   | dpkg --list            |
+| Lấy thông tin về gói đã cài đặt         | rpm –qil foo                         | dpkg --listfiles foo   |
+| Hiện các thông tin về gói đang có       | yum list foo                         | apt-cache search foo   |
+| Hiện tất cả các gói có thể              | yum list                             | apt-cache dumpavail    |
 
 Link tham khảo: 
 
