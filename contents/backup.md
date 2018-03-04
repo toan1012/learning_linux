@@ -12,7 +12,7 @@ sử dụng kiến thức bài về 'permission file'
 
 Lấy ví dụ:
 
-cp `code.sh` `code.sh.bak201803050152`
+`cp -a code.sh code.sh.bak201803050152`
 
 hoặc nếu muốn copy từ máy này tới máy kia ta có thể dùng `scp`
 
@@ -66,14 +66,19 @@ Cách xử dụng cũng tương tự 2 lệnh trên.
 
 **Lệnh tar**
 
-| Tùy chọn                     | Cách dùng                            |
+Dùng để giải nén file hay thư mục. 
+
+| Ví dụ   :                     | Cách dùng                            |
 |------------------------------|--------------------------------------|
 | tar xvf mydir.tar            | Giải nén file mydir.tả trong thư mục |
 | tar zcvf mydir.tar.gz mydir  | Tạo lưu trữ và giải nén file gzip    |
 | tar jcvf mydir.tar.bz2 mydir | Tạo lưu trữ và giải nén file gzip2   |
 | tar Jcvf mydir.tar.bz2 mydir | Tạo lưu trữ và giải nén file xz      |                                       
 
+**Tham khảo**
 
+[https://www.digitalocean.com/community/tutorials/an-introduction-to-file-compression-tools-on-linux-servers](https://www.digitalocean.com/community/tutorials/an-introduction-to-file-compression-tools-on-linux-servers
+)
 
 
 
