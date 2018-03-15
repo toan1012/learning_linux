@@ -1,0 +1,27 @@
+# User và group
+
+
+
+## Giải thích ý hiệu 
+ 
+**pts** viết tắt của pseudo terminal slave. Đây là môi trường
+console truyền thống gồm keyboard/screen 
+**run-level linux**
+| level | Mode                            | Action                                                                        |
+|-------|---------------------------------|-------------------------------------------------------------------------------|
+| 0     | Halt                            | shutdown system                                                               |
+| 1     | Single-User Mode                | Does not configure network interface, start daemons, or allow non-root logins |
+| 2     | Multi-User Mode                 | Does not configure network interfaces or  start daemons.                      |
+| 3     | Multi-User Mode with Networking | Starts the system normally.                                                   |
+| 4     | Undefined                       | Not used/User-definable                                                       |
+| 5     | X11                             | As runlevel 3 + display manager(X)                                            |
+| 6     | Reboot                          | Reboot the system                                                             |
+
+Để kiểm tra user đang đăng nhập hệ thống dùng lệnh `who`
+
+Khi dùng tùy chọn `who -a` hệ thống sẽ show tất cả những user từ lúc khởi động
+
+Mỗi user luôn có uid (userID), gid (groupID). Với user root uid=gid=0 với các 
+user khác bắt đầu bằng 1000(đối với ubuntu) tùy theo số user add thêm. 
+
+

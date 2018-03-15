@@ -1,3 +1,7 @@
+Tài liệu khóa học theo hướng dẫn từ
+[Link hướng dẫn](https://github.com/kalise/linux-notes)
+
+
 # Nội dung 
 1. [Basic commands](https://github.com/toan1012/learning_linux/blob/master/contents/basic_commands.md)
 2. [Work with file](https://github.com/toan1012/learning_linux/blob/master/contents/work_with_file.md)

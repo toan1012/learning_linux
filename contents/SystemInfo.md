@@ -29,7 +29,7 @@ Cho biết thông tin hệ thống.
 
 Để biết cụ thể hơn về phiên bản OS đang sử dụng ta dùng lệnh lsb_release
 
-| Tùy chọn | Cách dùng           | Kết quả ví dụ                                                                                                            |
+| Tùy chọn |Cách dùng           |Kết quả ví dụ                                                                                                            |
 |----------|---------------------|--------------------------------------------------------------------------------------------------------------------------|
 | -i       | id                  | Distributor ID: Ubuntu                                                                                                   |
 | -d       | mô tả               | Description:,Ubuntu 14.04.1 LTS                                                                                          |
