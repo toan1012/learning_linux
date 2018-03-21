@@ -1,0 +1,101 @@
+# User và group
+
+
+
+## Giải thích ý hiệu 
+ 
+**pts** viết tắt của pseudo terminal slave. Đây là môi trường
+console truyền thống gồm keyboard/screen 
+**run-level linux**
+| level | Mode                            | Action                                                                        |
+|-------|---------------------------------|-------------------------------------------------------------------------------|
+| 0     | Halt                            | shutdown system                                                               |
+| 1     | Single-User Mode                | Does not configure network interface, start daemons, or allow non-root logins |
+| 2     | Multi-User Mode                 | Does not configure network interfaces or  start daemons.                      |
+| 3     | Multi-User Mode with Networking | Starts the system normally.                                                   |
+| 4     | Undefined                       | Not used/User-definable                                                       |
+| 5     | X11                             | As runlevel 3 + display manager(X)                                            |
+| 6     | Reboot                          | Reboot the system                                                             |
+
+Để kiểm tra user đang đăng nhập hệ thống dùng lệnh `who`
+
+Khi dùng tùy chọn `who -a` hệ thống sẽ show tất cả những user từ lúc khởi động
+
+Mỗi user luôn có uid (userID), gid (groupID). Với user root uid=gid=0 với các 
+user khác bắt đầu bằng 1000(đối với ubuntu) tùy theo số user add thêm. 
+Giá trị uid, gid được lưu trong /etc/passwd và /etc/group. Sử dụng `cat` để xem
+hoặc dùng lệnh id sẽ nói phần sau. 
+
+```
+root@toan:~# cat /etc/passwd | grep toan
+toan:x:1000:1000:toan,,,:/home/toan:/bin/bash
+```
+
+Để **thêm** user ta dùng lệnh `adduser newber` . Một thư mục home của user newber 
+sẽ nằm ở /home/newber
+
+Để **xem thông tin của user** ta dùng lệnh `id user_muốn_xem`
+
+```
+root@toan:~# id toan
+uid=1000(toan) gid=1000(toan) groups=1000(toan),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lpadmin),111(sambashare),113(libvirtd)
+root@toan:~# id root
+uid=0(root) gid=0(root) groups=0(root),113(libvirtd)
+```
+
+Nếu người dùng muốn **thay đổi passwd** ta dùng lệnh `passwd user_name`
+
+Một user bao giờ cũng thuộc 1 group nào đó, mặc định là group có tên giống nó
+nếu muốn **add thêm** 1 group khác ta dùng lệnh `adduser use_name group_name`
+
+**Tạo group** `groupadd newgroup`
+
+**Gán một group primary cho 1 user** dùng lệnh `usermod -g primarygroupname username`
+
+**Gán secondary groups to 1 user** dùng lệnh `usermod -a -G secondarygroupname username`
+
+
+
+## Creating Alias
+
+Tạo alias 
+
+```
+root@toan:/etc/profile.d# alias ls='ls -all'
+root@toan:/etc/profile.d# ls
+total 16
+drwxr-xr-x   2 root root 4096 Feb 12 17:37 .
+drwxr-xr-x 108 root root 4096 Mar 15 10:47 ..
+-rw-r--r--   1 root root  663 May 11  2016 bash_completion.sh
+-rw-r--r--   1 root root 1559 Jul 29  2014 Z97-byobu.sh
+```
+
+Xóa alias
+
+```
+root@toan:/etc/profile.d# unalias ls
+root@toan:/etc/profile.d# ls
+bash_completion.sh  Z97-byobu.sh
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
