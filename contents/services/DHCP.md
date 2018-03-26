@@ -75,6 +75,26 @@ Với 1 mạng nhỏ (ví dụ có 254 host) thì cần phân hoạch IP thành 
 
 * Nhóm DHCP thực sự cấp trong range(pool).
 
+**renew hoặc release IP in eth0**
+
+Để renew một IP trên eth0 interface gõ lệnh:
+
+```
+$ sudo dhclient -r eth0
+$ sudo dhclient eth0
+```
+
+Nếu dùng wireless interface:
+
+```
+sudo dhclient -v -r eth0
+sudo dhclient -v eth0
+```
+
+DHCP server muốn sử dụng DNS chính là IP server thì cần cấu hình DNS server có cùng địa chỉ vs DHCP server. 
+Phần cấu hình DNS server sẽ được thực hiện trong bài khác. 
 
 
+
+[Tham khảo](https://www.tecmint.com/install-dhcp-server-in-ubuntu-debian/)
 
