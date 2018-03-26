@@ -95,6 +95,15 @@ DHCP server muốn sử dụng DNS chính là IP server thì cần cấu hình D
 Phần cấu hình DNS server sẽ được thực hiện trong bài khác. 
 
 
+Chú ý: DHCP server lắng nghe trên cổng 67 còn DHCP client lắng nghe trên cổng 68. Điều đó cũng đồng nghĩa các bản tin đi từ server
+sẽ ra ở cổng 67 ngược lại bản tin đi từ client đi ra từ cổng 68. Nhìn vào đặc điểm này cũng sẽ suy ra được đâu là server, đâu là client.
+
+* Khi bắt gói tin trên 2 đầu (CL,SV) kết quả giống nhau, nhưng khác nhau về thời gian.
+Gói tin đi từ phía nào thì thời gian bắt được gói tin trên phía đó sớm hơn. 
+
+
 
 [Tham khảo](https://www.tecmint.com/install-dhcp-server-in-ubuntu-debian/)
+[Tham khảo](https://github.com/hocchudong/thuctap012017/blob/master/TamNT/DHCP/LAB%20DHCP%20server%20%20-%20DHCP%20Relay%20Agent.md)
+
 
