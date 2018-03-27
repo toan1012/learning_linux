@@ -59,7 +59,7 @@ Trong bản tin ARP reply: Trường này sẽ điền địa chỉ của máy g
 
 **3.1. Hoạt động của ARP trong mạng LAN**
 
-!image[](https://pasteboard.co/HdRmqHp.png)
+![ARP](https://pasteboard.co/HdRmqHp.png)
 
 Bước 1: Máy gửi kiểm tra cache của mình. Nếu đã có thông tin về sự ánh xạ giữa địa chỉ IP và địa chỉ MAC thì chuyển sang Bước 7.
 
@@ -85,9 +85,9 @@ Bước 7: Thiết bị nguồn update vào ARP cache của mình giá trị tư
 
 **3.2. Hoạt động của ARP trong môi trường liên mạng**
 
-!image[](https://pasteboard.co/HdRo9b9.png)
+![ARP1](https://pasteboard.co/HdRo9b9.png)
 
-!image[](https://pasteboard.co/HdRoJ8N.png)
+![ARP2](https://pasteboard.co/HdRoJ8N.png)
 
 Hoạt động của ARP trong một môi trường phức tạp hơn đó là hai hệ thống mạng gắn với nhau thông qua một Router.
 
@@ -124,14 +124,12 @@ Trên thực tế ngoài dạng bảng định tuyến này người ta còn dù
 
     Thông thường bản tin ARP request này sẽ không có reply.
 
-
 * ARP announcements: ARP cũng sử dụng một cách đơn giản để thông báo tới các máy trong mạng khi địa chỉ IP hoặc địa chỉ MAC của nó thay đổi. Đó chính là bản tin gratuitous ARP
 
     Bản tin Gratuitous ARP được gửi broadcast request trong mạng với địa chỉ MAC và IP máy gửi là địa chỉ sau khi thay đổi.
 
-    Địa chỉ MAC đích là 00.00.00.00.00.00. Địa chỉ IP đích là chính nó. Điều này đảm bảo các máy trong mạng khi nhận được bản tin này sẽ chỉ cập nhật địa chỉ MAC và IP của máy gửi vào trong ARP caching của mình => không có bản tin reply cho bản tin này.
-
-    Hình minh họa: Bản tin Gratuitous ARP bắt được từ Wireshark.
+    Địa chỉ MAC đích là 00.00.00.00.00.00. Địa chỉ IP đích là chính nó. Điều này đảm bảo các máy trong mạng khi nhận được bản tin này sẽ chỉ
+	cập nhật địa chỉ MAC và IP của máy gửi vào trong ARP caching của mình. không có bản tin reply cho bản tin này.
 
 * ARP request: Là bản tin ARP request mà máy gửi gửi broadcast để tìm địa chỉ MAC của máy nhận.
 
@@ -160,22 +158,16 @@ Ngoài việc làm giảm lưu lượng mạng, ARP cache cũng đảm bảo đ�
 
 ARP Cache có dạng giống như một bảng tương ứng giữa địa chỉ hardware và địa chỉ IP.
 
-(Trong Window: dùng câu lệnh arp -a trong Command Prompt để show ra ARP cache trong máy)
+Trong linux có một số lệnh arp hay được dùng để thay đổi ARP table 
 
-    Có hai cách đưa các thành phần tương ứng vào bảng ARP :
+`arp -a` để show bảng arp table
 
-        Static ARP Cache Entries: Đây là cách mà các thành phần tương ứng trong bảng ARP được đưa vào lần lượt bởi người quản trị. Công việc được tiến hành một cách thủ công.
+`arp -d ip` để xóa 1 ip trong bảng. tuy nhiên phải dùng thêm lệnh ifdown và ifup để khởi động lại card mạng có ip cần xóa
 
-            Sử dụng trong trường hợp mà các workstation nên có static ARP entry đến router và file server nằm trong mạng. Điều này sẽ hạn chế việc gửi các gói tin để thực hiện quá trình phân giải địa chỉ.
+`ip -s neigh flush all` xóa hết entries
 
-            Sử dụng câu lệnh arp -s ip_addr mac_addrđể thêm một Static ARP entri vào ARP cache.
+`arp -s 10.0.0.1 00:8b:8a:4c:25:1f` add thêm 1 entry vào bảng
 
-            Nhược điểm: ngoài hạn chế của việc phải nhập bằng tay, static cache còn thêm hạn chế nữa là khi địa chỉ IP của các thiết bị trong mạng thay đổi thì sẽ dẫn đến việc phải thay đổi ARP cache.
 
-        Dynamic ARP Cache Entries: Đây là quá trình mà các thành phần địa chỉ hardware/IP được đưa vào ARP cache một cách hoàn toàn tự động bằng phần mềm sau khi đã hoàn tất quá trình phân giải địa chỉ.
 
-            Chúng được lưu trong cache trong một khoảng thời gian và sau đó sẽ được xóa đi.
 
-            Dynamic Cache được sử dụng rộng rãi hơn vì tất cả các quá trình diễn ra tự động và không cần đến sự tương tác của người quản trị.
-
-    Trong môi trường mạng thực tế, có nhiều lý do tác động dẫn tới sự ảnh hưởng làm thay đổi các thông tin về việc ánh xạ IP và MAC nên các thông tin trong dynamic cache sẽ được tự động xóa sau một khoảng thời gian nhất định. Quá trình này được thực hiện một cách hoàn toàn tự động khi sử dụng ARP với khoảng thời gian thường là 10 hoặc 20 phút (hoặc lâu hơn tùy vào loại thiết bị mà mình sử dụng, phụ thuộc nhà cung cấp). Sau một khoảng thời gian nhất định được lưu trong cache , thông tin sẽ được xóa đi. Lần sử dụng sau, thông tin sẽ được update trở lại. (đây là lúc mà các bản tin ARP announcements phát huy tác dụng).
