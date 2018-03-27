@@ -85,7 +85,7 @@ Bước 7: Thiết bị nguồn update vào ARP cache của mình giá trị tư
 
 **3.2. Hoạt động của ARP trong môi trường liên mạng**
 
-![ARP1](https://pasteboard.co/HdRo9b9.png)
+![ARP1](https://popimag.es/image/Xf3B)
 
 ![ARP2](https://pasteboard.co/HdRoJ8N.png)
 
