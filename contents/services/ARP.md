@@ -59,7 +59,7 @@ Trong bản tin ARP reply: Trường này sẽ điền địa chỉ của máy g
 
 **3.1. Hoạt động của ARP trong mạng LAN**
 
-![ARP](https://pasteboard.co/HdRmqHp.png)
+![ARP](https://i.imgur.com/5KvTh0L.png)
 
 Bước 1: Máy gửi kiểm tra cache của mình. Nếu đã có thông tin về sự ánh xạ giữa địa chỉ IP và địa chỉ MAC thì chuyển sang Bước 7.
 
@@ -85,9 +85,9 @@ Bước 7: Thiết bị nguồn update vào ARP cache của mình giá trị tư
 
 **3.2. Hoạt động của ARP trong môi trường liên mạng**
 
-![ARP1](https://popimag.es/image/Xf3B)
+![ARP1](https://i.imgur.com/jMhWOen.png)
 
-![ARP2](https://pasteboard.co/HdRoJ8N.png)
+![Imgur](https://i.imgur.com/I8MM617.png)
 
 Hoạt động của ARP trong một môi trường phức tạp hơn đó là hai hệ thống mạng gắn với nhau thông qua một Router.
 
