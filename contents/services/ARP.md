@@ -9,7 +9,7 @@ ARP là phương thức phân giải địa chỉ giữa địa chỉ lớp 3 v�
 
 Cấu trúc bản tin ARP được mô tả như hình sau:
 
-!image[](https://pasteboard.co/HdRhBRv.png)
+![ARP](https://i.imgur.com/5KvTh0L.png)
 
 **Hardware type**:
 
@@ -59,7 +59,7 @@ Trong bản tin ARP reply: Trường này sẽ điền địa chỉ của máy g
 
 **3.1. Hoạt động của ARP trong mạng LAN**
 
-![ARP](https://i.imgur.com/5KvTh0L.png)
+![ARP1](https://i.imgur.com/jMhWOen.png)
 
 Bước 1: Máy gửi kiểm tra cache của mình. Nếu đã có thông tin về sự ánh xạ giữa địa chỉ IP và địa chỉ MAC thì chuyển sang Bước 7.
 
@@ -85,7 +85,7 @@ Bước 7: Thiết bị nguồn update vào ARP cache của mình giá trị tư
 
 **3.2. Hoạt động của ARP trong môi trường liên mạng**
 
-![ARP1](https://i.imgur.com/jMhWOen.png)
+![Imgur](https://i.imgur.com/przDT1o.png)
 
 ![Imgur](https://i.imgur.com/I8MM617.png)
 
