@@ -80,4 +80,8 @@ Uptime:                 5 min 46 sec
 Threads: 1  Questions: 12  Slow queries: 0  Opens: 113  Flush tables: 1  Open tables: 106  Queries per second avg: 0.034
 ```
 
+Tham khảo
+
+[https://www.digitalocean.com/community/tutorials/how-to-install-the-latest-mysql-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-the-latest-mysql-on-ubuntu-16-04)
+
 

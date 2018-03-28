@@ -169,5 +169,8 @@ Trong linux có một số lệnh arp hay được dùng để thay đổi ARP t
 `arp -s 10.0.0.1 00:8b:8a:4c:25:1f` add thêm 1 entry vào bảng
 
 
+Tham khảo
+
+[https://github.com/hocchudong/thuctap012017/blob/master/TamNT/T%C3%ACm%20hi%E1%BB%83u%20giao%20th%E1%BB%A9c%20ARP.md](https://github.com/hocchudong/thuctap012017/blob/master/TamNT/T%C3%ACm%20hi%E1%BB%83u%20giao%20th%E1%BB%A9c%20ARP.md)
 
 
