@@ -1,4 +1,4 @@
-# Thao tác với DB
+# Thao tác tạo user, cấp quyền, và tạo DB
 
 Mục tiêu: Tạo được DB và tạo các bảng trong đó rồi đổ dữ liệu vào
 để test. database có tên testdb và user mysql quản lý tên là testuser. 
@@ -56,9 +56,7 @@ Kiểm tra lại bằng lệnh `show tables;`, nếu có table task ta kiểm tr
 
 Kiểm tra mô tả của bảng bằng lệnh `describe tasks;`
 
-## Bàn chuyện ngoài lề.
-
-**Chuyện thứ nhất** - đổi password và chính sách mật khẩu của mysql
+## Đổi password và chính sách mật khẩu của mysql
 
 Nếu để ý ta thấy trong phần cài đặt mysql có phần mở rộng là `mysql_secure_installation`
 để cài các chính sách bảo mật. Tôi đã chọn mức bảo mật medium.
@@ -71,6 +69,7 @@ chính sách độ dài ít nhất 8 ký tự. Để xem chính sách đã chọ
 
 Nhớ dấu ";" ở cuối mỗi lệnh. 
 
+```
 +--------------------------------------+--------+
 | Variable_name                        | Value  |
 +--------------------------------------+--------+
@@ -82,6 +81,7 @@ Nhớ dấu ";" ở cuối mỗi lệnh.
 | validate_password_policy             | MEDIUM |
 | validate_password_special_char_count | 1      |
 +--------------------------------------+--------+
+```
 
 Ta có thể thay đổi các giá trị trong bảng bằng lệnh `SET global variable_name = giá trị`.
  Giả sử tôi sẽ set validate_password_length ít nhất 6 ký tự và validate_password_length
@@ -118,7 +118,7 @@ Ai lười và không cần bảo mật có thể xóa flugin secure đi bằng 
 
 Tuy nhiên lệnh này tôi chưa thử. 
 
-**Câu chuyện thứ 2** - Phải kiểm tra những gì đã tạo
+## Phải kiểm tra những gì đã tạo
 
 Khi tạo user hay database hay sau này là record, attribute đêu phải test. 
 
@@ -162,7 +162,7 @@ mysql> show grants for testuser@'localhost';
 
 Kiểm tra 1 DB thuộc những user nào quản lý. --------------------------------------------------------
 
-**Vấn đề 3** - Phân quyền user
+## Phân quyền user
 
 Các việc cần phải làm cho mục này là thêm user, xóa user, thêm quyền cho user, bớt quyền cho user. 
 
@@ -219,7 +219,7 @@ FLUSH PRIVILEGES;
 permission trong lệnh trên tương tự của permission phần cấp quyền.
 
 	
-**Vấn đề 4** - Binding address
+## Binding address
 
 Nếu ai đó trong cùng mạng LAN(giới hạn hiện giờ là trong mạng Lan) muốn truy cập vào DB mà không
 dùng SSH thì ta sử dụng cách binding-address để cho phép máy đó remote qua cổng 3306 (thông
@@ -227,7 +227,7 @@ tin này đọc được qua stackoverflow cần được kiểm chứng).
 
 Điều kiện lab: 2 máy đều chạy mysql 5.7, máy bị remote đang chạy Ubuntu 16.04LTS
 
-B1. Sửa file cấu hình mysql
+**B1. Sửa file cấu hình mysql**
 
 * Trên máy bị remote vào sửa file: /etc/mysql/mysql.conf.d/mysqld.cnf
 
@@ -237,11 +237,14 @@ B1. Sửa file cấu hình mysql
 đang điền 0.0.0.0 để cho phép bất kỳ máy nào remote. Mỗi 1 IP 1 dòng. Có 10 máy remote có 
 10 dòng. Save.
 
-B2. Khởi động lại dịch vụ
+**B2. Khởi động lại dịch vụ**
 
 `service mysql restart`
 
-B3. Cấp quyền cho user remote có thể vào được, Để cấp quyền cần vào bằng user root `mysql -uroot -p`
+**B3. Cấp quyền cho user remote**
+Để remote có thể điều khiển được phải cấp quyền 
+
+Để cấp quyền cần vào bằng user root `mysql -uroot -p`
 
 `GRANT ALL ON <local database name>.* TO <remote web node user name>@<remote web node server ip address> 
 IDENTIFIED BY '<database user password`
@@ -266,12 +269,7 @@ Enter password:
 ERROR 1045 (28000): Access denied for user 'toan'@'localhost' (using password: YES)
 ```
 
-
-
-mysql -h 192.168.11.129 -u toan -p
-
-
-Tham khảo
+## Tham khảo
 
 [http://devdocs.magento.com/guides/v2.0/install-gde/prereq/mysql_remote.html](http://devdocs.magento.com/guides/v2.0/install-gde/prereq/mysql_remote.html)
 
