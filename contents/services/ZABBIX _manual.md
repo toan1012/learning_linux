@@ -85,9 +85,16 @@ Khả năng cấp quyền hệ thống
 
 * Việc xác thực cho user rất an toàn.
 
-Khả năng hỗ trợ đầy đủ các nền tảng giúp dễ dàng trong việc mở rộng agent
+Khả năng hỗ trợ đầy nhiều nền tảng, giúp dễ dàng trong việc mở rộng agent
 
-* Có thể triển khai trên cả window và linux.
+* Zabbix agent có khả năng hỗ trợ nhiều nền tảng: IBM AIX, FressBSD, NetBSD, OpenBSD, HP-UX,
+Mac OSX, Solaris: 9,10,11; Window tất cả các bản desktop và server từ version XP. 
+
+4. Kiến trúc, thành phần
+
+
+
+
 
 
 
