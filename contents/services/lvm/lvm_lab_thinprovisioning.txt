@@ -138,8 +138,3 @@ Có một điều cần lưu ý khi ta bắt đầu sử dụng đến Over Prov
 
   `# lvextend -L +15G /dev/vg_thin/volume_pool`
 
-**Tham khảo**
-
- [https://www.tecmint.com/setup-thin-provisioning-volumes-in-lvm/](https://www.tecmint.com/setup-thin-provisioning-volumes-in-lvm/)
-
- 

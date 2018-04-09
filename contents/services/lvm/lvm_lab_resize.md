@@ -166,3 +166,8 @@ Do you really want to reduce lv_addition? [y/n]: y
 Sau bước này nhớ resize và mount LV lại vào FHS để sử dung.
 
 Đến đây là hoàn thành lab2. 
+
+
+**Tham khảo**
+
+[https://www.tecmint.com/extend-and-reduce-lvms-in-linux/](https://www.tecmint.com/extend-and-reduce-lvms-in-linux/)

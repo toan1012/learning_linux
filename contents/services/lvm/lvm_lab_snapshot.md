@@ -77,6 +77,9 @@ Gặp tình huống này ta sẽ dùng lệnh `lsof /tmp/lvm/` để tìm tiến
 
 Một lưu ý nữa là snapshot LV cũng được xem là một LV bình thường nên mọi lệnh về tăng giảm kích thước của LV đều làm được với snapshot. 
  
+**Tham khảo**
+
+https://www.tecmint.com/take-snapshot-of-logical-volume-and-restore-in-lvm/
 
 http://oletange.blogspot.com/2012/04/umount-device-is-busy-why.html
 

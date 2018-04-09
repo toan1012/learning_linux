@@ -1,5 +1,8 @@
 # Lab 1: Tạo logical volume.
 
+A [link](http://example.com "Title").
+
+
 ## Mục tiêu
 
 * Mục tiêu của bài lab này là ta sẽ tạo được các logical volume để nhìn thấy đúng mô hình của LVM (tức là bao gồm 3 phần: 
@@ -188,4 +191,9 @@ mount -av
 
 Lưu ý: Khi cài đặt nhiều distro linux mới, chương trình cài đặt sẽ hỏi có cài lvm không ( điển hình
 có thể thấy trên centos 6) thì ta không được để /boot chạy lvm, hãy để nó chạy trên 1 phân vùng vật lý. 
+
+
+**Tham khảo**
+
+[https://www.tecmint.com/create-lvm-storage-in-linux/](https://www.tecmint.com/create-lvm-storage-in-linux/)
 
