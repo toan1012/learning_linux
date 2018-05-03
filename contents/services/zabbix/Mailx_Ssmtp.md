@@ -127,6 +127,12 @@ Test:
 
 `echo "TEST EMAIL" | mail -s "SSMTP IS WORKING" TEST@gmail.com`
 
+## Linh tham khảo
+
+[http://howtoconfigure.blogspot.com/2013/04/how-to-install-and-configure-ssmtp-on.html](http://howtoconfigure.blogspot.com/2013/04/how-to-install-and-configure-ssmtp-on.html)
+
+[https://gist.github.com/ilkereroglu/aa6c868153d1c5d57cd8](https://gist.github.com/ilkereroglu/aa6c868153d1c5d57cd8)
+
 
 
 
