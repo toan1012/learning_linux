@@ -1,5 +1,7 @@
 # Cài đặt mailx.
 
+Đây là 2 chương trình dùng để gửi mail từ server tới gmail. Ứng dụng của nó có thể gửi mail đồng loạt nhiều user theo danh sách
+
 ```
 yum -y update
 yum install -y mailx
@@ -9,12 +11,12 @@ Tạo link
 
 `ln -s /bin/mailx /bin/email`
 
-###Set an External SMTP Server to Relay E-Mails
+Thiết lập external smpt để relay emails.
 
 ```
 vi /etc/mail.rc
 
-edit
+Sửa như sau
 
 set smtp=smtps://smtp.gmail.com:465
 set smtp-auth=login
@@ -26,7 +28,8 @@ set nss-config-dir=/etc/pki/nssdb/
 
 Chú ý là gmail không cài bảo mật nhiều lớp. Nếu không sẽ thông báo tài khoản hoặc mật khẩu
 không đúng.
-Kết quả
+
+Kết quả như hình dưới
 
 ```
 #echo "Hello world! " | mail -v -s "Test send mail" zabbix.discovery@gmail.com
@@ -65,7 +68,7 @@ subject=CN=smtp.gmail.com,O=Google Inc,L=Mountain View,ST=California,C=US
 221 2.0.0 closing connection y29sm23729583pff.42 - gsmtp
 ```
 
-Nếu muốn gửi qua port 587 (TLS) thì 
+Nếu muốn gửi qua port 587 (TLS) thì
 
 ```
 set smtp=smtps://smtp.gmail.com:465 # change protocol here
@@ -73,13 +76,13 @@ set smtp-use-starttls        # add this
 ./zabbix-alert-smtp.sh zabbix.discovery@gmail.com "Test email 11111111111" "Hello Zabbix"
 ```
 
-# Install SSMTP on Centos 7
+# Cài đặt ssmtp trên Centos 7
 
 Thêm repo nếu chưa có
 
 `yum install epel-release -y`
 
-Cài đặt
+Cài đặt.
 
 `yum -y install ssmtp`
 
@@ -108,19 +111,19 @@ systemctl disable postfix
 Edit SSMTP config file: (/etc/ssmtp/ssmtp.conf)
 
 ```
-    root=postmaster
-    mailhub=mail
-    TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
-    mailhub=smtp.gmail.com:587   # SMTP server for Gmail
-    Hostname=localhost
-    UseTLS=YES
-    UseSTARTTLS=Yes
-    FromLineOverride=YES #TO CHANGE FROM EMAIL
-    Root=ROOT@EMAIL # Redirect root email
-    AuthUser=EMAIL@gmail.com
-    AuthPass=PASSWORD
-    AuthMethod=LOGIN
-    RewriteDomain=gmail.com
+root=postmaster
+mailhub=mail
+TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
+mailhub=smtp.gmail.com:587   # SMTP server for Gmail
+Hostname=localhost
+UseTLS=YES
+UseSTARTTLS=Yes
+FromLineOverride=YES #TO CHANGE FROM EMAIL
+Root=ROOT@EMAIL # Redirect root email
+AuthUser=EMAIL@gmail.com
+AuthPass=PASSWORD
+AuthMethod=LOGIN
+RewriteDomain=gmail.com
 ```
  
 Test:
