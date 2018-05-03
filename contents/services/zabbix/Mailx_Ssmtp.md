@@ -75,15 +75,15 @@ set smtp-use-starttls        # add this
 
 # Install SSMTP on Centos 7
 
-Add the repo if it’s not added:
+Thêm repo nếu chưa có
 
-yum install epel-release -y
+`yum install epel-release -y`
 
-Install:
+Cài đặt
 
-yum -y install ssmtp
+`yum -y install ssmtp`
 
-Configure:
+Cấu hình
 
 `alternatives --config mta`
 
