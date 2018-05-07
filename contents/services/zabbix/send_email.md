@@ -16,7 +16,7 @@ chmod +x zabbix-alert-smtp.sh
 Vào sửa 2 trường trong file zabbix-alert-smtp.sh vừa tải về cho phù hợp với account gmail. 
 
 ```
-MAIL_ACCOUNT = 'account@gmail.com'
+MAIL_ACCOUNT = 'A@gmail.com'
 MAIL_PASSWORD = '*****'
 ```
 
@@ -30,13 +30,39 @@ firewall-cmd –reload
 
 Chạy kiểm tra script viết đúng không.
 
-`./zabbix-alert-smtp.sh account@gmail.com "Test email" "Hello Zabbix"`
+`./zabbix-alert-smtp.sh A@gmail.com "Test email" "Hello Zabbix"`
 
 ## 3. Khởi tạo media type trên web
 
 Vào Admininstration|Media Types|Create media type . Sau đó điền đúng các thông tin vào
 
-![Imgur](https://i.imgur.com/WbSsisL.png)
+![Imgur](https://i.imgur.com/DtgeSAa.png)
+
+Trong đó: 
+
+1. Tên của media type 
+
+2. Type: Loại media type. Chọn script vì ta dùng đoạn script vừa download ở trên để gửi mail
+
+3. Script name: Tên của script. Default dir là /usr/lib/zabbix/alertscripts nên chỉ cần điền tên file script đặt trong thư mục kia.
+
+4. Là trường sendto trong Configuration|Users|Media
+
+![Imgur](https://i.imgur.com/kNTdy6Z.png)
+
+5. subject là "Problem: {TRIGGER.NAME}"
+
+6. message có cấu trúc như trong Configuration|Actions|Operation
+
+```
+Problem started at {EVENT.TIME} on {EVENT.DATE}
+Problem name: {TRIGGER.NAME}
+Host: {HOST.NAME}
+Severity: {TRIGGER.SEVERITY}
+
+Original problem ID: {EVENT.ID}
+{TRIGGER.URL}
+```
 
 ## 4. Gán cho user với hành động gửi mail
 
